@@ -1,0 +1,1 @@
+/* "dev": "webpack serve --config config/webpack.dev.js --open", */
