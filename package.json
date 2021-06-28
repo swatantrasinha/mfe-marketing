@@ -2,9 +2,9 @@
   "name": "marketing",
   "version": "1.0.0",
   "scripts": {
-    "heroku-prebuild": "npm install --dev",
+    "postinstall": "webpack --mode production --config config/webpack.prod.js",
     "dev": "webpack serve --config config/webpack.dev.js --open",
-    "start": "webpack --mode production --config config/webpack.prod.js && node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "webpack": "^5.4.0",
