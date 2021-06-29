@@ -4,12 +4,13 @@ const path = require('path');
 const port = process.env.PORT || 5000;
 const app = express();
 console.log('__dirname is : ', __dirname);
-// var distFolder = path.join(__dirname, 'dist');
 
-//console.log('distFolder is : ', distFolder);
-
-// app.use('/', express.static(distFolder));
 app.use('/', express.static(__dirname));
+/*
+var distFolder = path.join(__dirname, 'dist');
+console.log('distFolder is : ', distFolder);
+app.use('/', express.static(distFolder));
+*/
 
 // send the user to index html page inspite of the url
 app.get('*', (req, res) => {
