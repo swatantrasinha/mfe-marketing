@@ -8,7 +8,7 @@ import Pricing from './components/Pricing';
 export default () => {
     return (
     <div>
-        <h1>Marketing App - Deployed to Heroku</h1>
+        <h3>Marketing App</h3>
         <StylesProvider>
             <BrowserRouter>
                 <Switch>
