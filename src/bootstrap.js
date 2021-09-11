@@ -1,28 +1,49 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+// import {createMemoryHistory} from 'history';
+import {createMemoryHistory, createBrowserHistory} from 'history'; // lec91
 
 console.log('Hello from Marketing App !!!');
- // mount function to start-up the app
+ 
+/*
 const mount = (el) => {
+    const history = createMemoryHistory();
     ReactDOM.render(
-        // <h1>Hi There !!!</h1>,
-        <App />,
+          <App history={history} />,
         el
     )
+}; */
+
+
+const mount = (el, {onNavigate, defaultHistory }) => {
+    const history = defaultHistory || createMemoryHistory();  // defaultHistory will only be there in dev mode and in isolation
+    if(onNavigate) {
+        history.listen(onNavigate);
+    }
+    
+    ReactDOM.render(
+          <App history={history} />,
+        el
+    )
+
+    return {
+        onParentNavigate(location) {
+            console.log('container just navigated !!!!', location);
+            const nextPathname = location.pathname;
+            const {pathname} = history.location;
+            if(pathname !== nextPathname) {
+                history.push(nextPathname);
+            }
+        }
+    }
 };
 
-
-// if we are in development and in isolation ,
-// call mount immediately
-
-//check if(process.env.NODE_ENV === 'development') {
     const devRoot = document.querySelector('#_marketing-dev-root');
     if(devRoot) {
-        mount(devRoot);
+        // mount(devRoot);
+        mount(devRoot, {defaultHistory: createBrowserHistory(0) });
     }
-//check }
 
-// we are running through container
-// and we should export the mount function
+
 export {mount};
